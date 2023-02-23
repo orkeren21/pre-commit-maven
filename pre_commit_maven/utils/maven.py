@@ -40,7 +40,7 @@ def execute(args: list, cwd: str, shell_runner=shell, env=os.environ.copy()):
 
     dincludes = ["-Dincludes='**\\'$(git diff --cached --name-only --diff-filter=AM | tr '\n' ' '| rev | cut -c 2- | rev)"]
     cmd = [get_maven_path(cwd, shell_runner)] + MAVEN_CLI_OPTS + args + dincludes
-
+    print(f"Runningthe following maven command: {cmd}")
     env["MAVEN_OPTS"] = " ".join(MAVEN_OPTS)
     return shell_runner.execute(cmd, cwd=cwd, env=env)
 
