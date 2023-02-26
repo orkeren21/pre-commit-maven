@@ -27,7 +27,7 @@ def auto_fix_and_add(previous_return_code, cwd=CWD):
     if modified_files.stdout != '':
         file_list = modified_files.stdout.split(" ")
         file_list_new_line = '\n'.join(file_list)
-        print(f"{Colours.OKBLUE} Spotless modified these files: {file_list_new_line}{Colours.ENDC}")
+        print(f"{Colours.OKBLUE} Spotless modified these files:\n{file_list_new_line}{Colours.ENDC}")
         shell.execute_direct("git add " + modified_files.stdout)
         print(f"{Colours.BOLD} {Colours.OKGREEN} Successfully added modified files {Colours.ENDC}")
         return result.return_code
