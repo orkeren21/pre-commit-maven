@@ -19,7 +19,7 @@ def main(cwd=CWD, print_fn=print, execute_fn=generic_main.execute) -> int:
 def autoFixAndCommit(previousReturnCode, cwd=CWD):
     # Important that following command is MODIFIED filter only!
     result = ExecutionResult(previousReturnCode, "", "")
-    modified_files =  shell.execute_direct("git diff --cached --name-only --diff-filter=M | grep .java$ | tr '\n' ' '| rev | cut -c 2- | rev)", cwd=cwd, env=ENV)
+    modified_files =  shell.execute_direct("git diff --cached --name-only --diff-filter=M | grep .java$ | tr '\n' ' '| rev | cut -c 2- | rev", cwd=cwd, env=ENV)
     print(f"ran modified files got {modified_files.stdout} and {modified_files.stderr}")
     if modified_files.stdout != '':
         shell.execute_direct("git add " + modified_files.stdout)
