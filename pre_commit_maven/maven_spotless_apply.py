@@ -15,7 +15,7 @@ DINCLUDES_ADDED_MODIFIED = f"-Dincludes=\'$(git diff --cached --name-only --diff
 
 
 def main(cwd=CWD, print_fn=print, execute_fn=generic_main.execute) -> int:
-    return_code = execute_fn(["spotless:apply", f"-Dincludes=\'$({GIT_DIFF_ADDED_MODIFIED})\'"], cwd)
+    return_code = execute_fn(["spotless:apply", f"-Dincludes=\"$({GIT_DIFF_ADDED_MODIFIED})\""], cwd)
     return auto_fix_and_add(return_code, cwd=cwd)
 
 def auto_fix_and_add(previous_return_code, cwd=CWD):
