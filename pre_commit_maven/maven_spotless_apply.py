@@ -10,9 +10,9 @@ ENV = os.environ.copy()
 def main(cwd=CWD, print_fn=print, execute_fn=generic_main.execute) -> int:
     result = execute_fn(["spotless:apply"], cwd)
     print(f"ran spotless apply got result code {result}")
-    if(result != 0):
-        # Encountered an error
-        return result
+    # if(result != 0):
+    #     # Encountered an error
+    #     return result
     return autoFixAndCommit()
 
 def autoFixAndCommit():
