@@ -3,14 +3,14 @@ import os
 import os.path
 from pre_commit_maven.utils import generic_main
 from pre_commit_maven.utils import shell
-from utils import ExecutionResult
+from pre_commit_maven.utils.shell import ExecutionResult
 
 CWD = os.getcwd()
 ENV = os.environ.copy()
 
 def main(cwd=CWD, print_fn=print, execute_fn=generic_main.execute) -> int:
     return_code = execute_fn(["spotless:apply"], cwd)
-    print(f"ran spotless apply got result code {result}")
+    print(f"ran spotless apply got result code {return_code}")
     # if(result != 0):
     #     # Encountered an error
     #     return result
