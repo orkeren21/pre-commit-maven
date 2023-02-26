@@ -7,7 +7,7 @@ from pre_commit_maven.utils.shell import ExecutionResult
 
 CWD = os.getcwd()
 ENV = os.environ.copy()
-GREP_FILTER_AND_CLEAN = "grep .java$ | tr '\\n' ' ' | rev | cut -c 2- | rev"
+GREP_FILTER_AND_CLEAN = "grep .java$ | tr '\\n' \' \' | rev | cut -c 2- | rev"
 GIT_DIFF_MODIFIED_ONLY = f"git diff --cached --name-only --diff-filter=M | {GREP_FILTER_AND_CLEAN}"
 GIT_DIFF_ADDED_MODIFIED = f"git diff --cached --name-only --diff-filter=AM | {GREP_FILTER_AND_CLEAN}"
 DINCLUDES_ADDED_MODIFIED = f"-Dincludes=\'$(git diff --cached --name-only --diff-filter=AM | {GREP_FILTER_AND_CLEAN})\'"
