@@ -13,18 +13,18 @@ def main(cwd=CWD, print_fn=print, execute_fn=generic_main.execute) -> int:
     # if(result != 0):
     #     # Encountered an error
     #     return result
-    return autoFixAndCommit(cwd=cwd)
+    return autoFixAndCommit(result, cwd=cwd)
 
-def autoFixAndCommit(cwd=CWD):
+def autoFixAndCommit(result, cwd=CWD):
     # Important that following command is MODIFIED filter only!
     modified_files =  shell.execute_direct("git diff --cached --name-only --diff-filter=M | grep .java$ | tr '\n' ' '| rev | cut -c 2- | rev)", cwd=cwd, env=ENV)
     print(f"ran modified files got {modified_files.stdout} and {modified_files.stderr}")
     if modified_files.stdout != '':
         shell.execute_direct("git add " + modified_files.stdout)
         result = shell.execute_direct("git commit -m \"spotless apply auto-commit\"")
-        print(f"ran commit got {result.stdout} and {result.stderr}")
-        return result
-    return result
+        print(f"ran commit got {result.return_code} {result.stdout} and {result.stderr}")
+        return result.return_code
+    return result.return_code
 
 if __name__ == "__main__":
     exit(main())
