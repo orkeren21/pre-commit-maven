@@ -23,7 +23,6 @@ def execute(cmd, **kwargs):
     kwargs.setdefault("shell", True)
     kwargs.setdefault("bufsize", 1)
 
-    print("Running the actual command:")
     print(" ".join(cmd))
     process = subprocess.Popen(" ".join(cmd), **kwargs)
     stdout, stderr = process.communicate()

@@ -16,6 +16,7 @@ GIT_DIFF_ADDED_MODIFIED = f"git diff --cached --name-only --diff-filter={ADDED_F
 
 
 def main(cwd=CWD, print_fn=print, execute_fn=generic_main.execute) -> int:
+    print(f"{Colours.BOLD}{Colours.OKBLUE} Running spotless:apply on staged files")
     return_code = execute_fn(["spotless:apply", f"-Dincludes=\"$({GIT_DIFF_ADDED_MODIFIED})\""], cwd)
     return auto_fix_and_add(return_code, cwd=cwd)
 
@@ -26,8 +27,7 @@ def auto_fix_and_add(previous_return_code, cwd=CWD):
     print(f"{Colours.OKBLUE} Spotless modified the following files: {modified_files.stdout} {Colours.ENDC}")
     if modified_files.stdout != '':
         shell.execute_direct("git add " + modified_files.stdout)
-        print(f"{Colours.BOLD} {Colours.OKGREEN} Testing {Colours.ENDC}")
-        print(f"{Colours.HEADER} {Colours.OKBLUE} Successfully Added Files {Colours.ENDC}")
+        print(f"{Colours.BOLD} {Colours.OKGREEN} Successfully added modified files {Colours.ENDC}")
         return result.return_code
     return result.return_code
 
