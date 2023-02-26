@@ -10,10 +10,6 @@ ENV = os.environ.copy()
 
 def main(cwd=CWD, print_fn=print, execute_fn=generic_main.execute) -> int:
     return_code = execute_fn(["spotless:apply"], cwd)
-    print(f"ran spotless apply got result code {return_code}")
-    # if(result != 0):
-    #     # Encountered an error
-    #     return result
     return autoFixAndCommit(return_code, cwd=cwd)
 
 def autoFixAndCommit(previousReturnCode, cwd=CWD):
@@ -23,8 +19,6 @@ def autoFixAndCommit(previousReturnCode, cwd=CWD):
     print(f"ran modified files got {modified_files.stdout} and {modified_files.stderr}")
     if modified_files.stdout != '':
         shell.execute_direct("git add " + modified_files.stdout)
-        # result = shell.execute_direct("git commit -m \"spotless apply auto-commit\"")
-        # print(f"ran commit got {result.return_code} {result.stdout} and {result.stderr}")
         return result.return_code
     return result.return_code
 
