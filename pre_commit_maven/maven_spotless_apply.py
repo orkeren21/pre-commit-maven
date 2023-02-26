@@ -24,11 +24,13 @@ def auto_fix_and_add(previous_return_code, cwd=CWD):
     # Important that following command is MODIFIED filter only!
     result = ExecutionResult(previous_return_code, "", "")
     modified_files =  shell.execute_direct(GIT_DIFF_MODIFIED_ONLY, cwd=cwd, env=ENV)
-    print(f"{Colours.OKBLUE} Spotless modified the following files: {modified_files.stdout} {Colours.ENDC}")
     if modified_files.stdout != '':
+        print(f"{Colours.OKBLUE} Spotless modified the following files: {modified_files.stdout} {Colours.ENDC}")
         shell.execute_direct("git add " + modified_files.stdout)
         print(f"{Colours.BOLD} {Colours.OKGREEN} Successfully added modified files {Colours.ENDC}")
         return result.return_code
+    else:
+        print(f"{Colours.OKBLUE} Spotless didn't modify any files{Colours.ENDC}")
     return result.return_code
 
 if __name__ == "__main__":
