@@ -37,8 +37,10 @@ def get_maven_path(cwd: str, shell_runner=shell):
 
 def execute(args: list, cwd: str, shell_runner=shell, env=os.environ.copy()):
     assert args is not None and len(args) > 0, "args not specified"
+
+    # dincludes = ["-Dincludes=\'$(git diff --cached --name-only --diff-filter=AM | grep .java$ | tr '\n' ' '| rev | cut -c 2- | rev)\'"]
     cmd = [get_maven_path(cwd, shell_runner)] + MAVEN_CLI_OPTS + args
-    print(f"This is the command Im going to perform: {cmd}")
+    print(f"Running the following maven command: {cmd}")
     env["MAVEN_OPTS"] = " ".join(MAVEN_OPTS)
     return shell_runner.execute(cmd, cwd=cwd, env=env)
 
