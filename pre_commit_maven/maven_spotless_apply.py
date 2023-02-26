@@ -23,8 +23,8 @@ def autoFixAndCommit(previousReturnCode, cwd=CWD):
     print(f"ran modified files got {modified_files.stdout} and {modified_files.stderr}")
     if modified_files.stdout != '':
         shell.execute_direct("git add " + modified_files.stdout)
-        result = shell.execute_direct("git commit -m \"spotless apply auto-commit\"")
-        print(f"ran commit got {result.return_code} {result.stdout} and {result.stderr}")
+        # result = shell.execute_direct("git commit -m \"spotless apply auto-commit\"")
+        # print(f"ran commit got {result.return_code} {result.stdout} and {result.stderr}")
         return result.return_code
     return result.return_code
 
