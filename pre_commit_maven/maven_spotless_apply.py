@@ -27,12 +27,17 @@ def auto_fix_and_add(previous_return_code, cwd=CWD):
     if modified_files.stdout != '':
         file_list = modified_files.stdout.split(" ")
         file_list_new_line = '\n'.join(file_list)
-        print(f"{Colours.OKBLUE} Spotless modified these files:\n{file_list_new_line}{Colours.ENDC}")
+        print(f"{Colours.OKBLUE}Spotless modified these files:\n{file_list_new_line}{Colours.ENDC}")
+        print(f"{Colours.DARKCYAN}Spotless modified these files:\n{Colours.ENDC}")
+        print(f"{Colours.PURPLE}Spotless modified these files:\n{Colours.ENDC}")
+        print(f"{Colours.WARNING}Spotless modified these files:\n{Colours.ENDC}")
         shell.execute_direct("git add " + modified_files.stdout)
-        print(f"{Colours.BOLD} {Colours.OKGREEN} Successfully added modified files {Colours.ENDC}")
+        print(f"{Colours.BOLDGREEN}Successfully added modified files {Colours.ENDC}")
+        print(f"{Colours.BOLD}{Colours.OKGREEN}Successfully added modified files {Colours.ENDC}")
+
         return result.return_code
     else:
-        print(f"{Colours.OKBLUE} Spotless didn't modify any files{Colours.ENDC}")
+        print(f"{Colours.OKBLUE}Spotless didn't modify any files{Colours.ENDC}")
     return result.return_code
 
 if __name__ == "__main__":
